@@ -43,25 +43,26 @@ def power_of_number(base, power):
     else:
         return (base * power_of_number(base, power-1))
 
-def swap(char_list, index_a, index_b):
-    temp = char_list[index_a]
-    char_list[index_a] = char_list[index_b]
-    char_list[index_b] = temp
-    return(char_list)
 
+def find_possible_strings_recursive(character_set, prefix, len_set, n):
+    
+    if n == 0:
+        print(prefix)
+        return
+    else:
+        for i in range(0, len_set):
+            temp_prefix = prefix + str(character_set[i])
+            find_possible_strings_recursive(character_set, temp_prefix, len_set, n - 1)
 
 def find_possible_strings(character_set, n):
     """TODO: complete for Step 3"""
-    total_number_sets = power_of_number(n, len(character_set))
-    size_set = len(character_set)
-    if (size_set == 1):
-        for j in range(0, n):
-            character_set
+    len_set = len(character_set)
+    find_possible_strings_recursive(character_set, "", len_set, n)
 
 
 def main():
-    ch_str = "ab"
-    find_possible_strings(ch_str, 3)
+    ch_list = ['a', 'b']
+    find_possible_strings(ch_list, 3)
 
 if __name__ == "__main__":
     main()
