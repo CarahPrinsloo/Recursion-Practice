@@ -36,33 +36,40 @@ def sum_all(element):
     return sum
 
 
-def power_of_number(base, power):
-    """Calculates the power of a number"""
-    if (power == 1):
-        return base
-    else:
-        return (base * power_of_number(base, power-1))
+def find_possible_strings_recursive(character_set, prefix, len_set, n, possible_strings):
 
-
-def find_possible_strings_recursive(character_set, prefix, len_set, n):
-    
     if n == 0:
-        print(prefix)
+        possible_strings.append(prefix)
         return
     else:
         for i in range(0, len_set):
             temp_prefix = prefix + str(character_set[i])
-            find_possible_strings_recursive(character_set, temp_prefix, len_set, n - 1)
+            find_possible_strings_recursive(character_set, temp_prefix, len_set, n - 1, possible_strings)
+
+
+def is_list_of_characters(my_list):
+    str_of_list = ""
+    for item in my_list:
+        try:
+            str_of_list = str_of_list + item
+        except:
+            return False
+    return True
+
 
 def find_possible_strings(character_set, n):
     """TODO: complete for Step 3"""
+    """Given a set of characters and a positive integer n, 
+    print all possible strings of length n that can be formed 
+    from the given set."""
+    possible_strings = []
+    if not is_list_of_characters(character_set):
+        return possible_strings
     len_set = len(character_set)
-    find_possible_strings_recursive(character_set, "", len_set, n)
+    find_possible_strings_recursive(character_set, "", len_set, n, possible_strings)
+    return (possible_strings)
 
-
-def main():
-    ch_list = ['a', 'b']
-    find_possible_strings(ch_list, 3)
 
 if __name__ == "__main__":
-    main()
+    my_list = [1, 'b']
+    print(find_possible_strings(my_list, 2))
